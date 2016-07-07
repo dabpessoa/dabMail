@@ -13,10 +13,12 @@ import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.mail.AuthenticationFailedException;
+import javax.mail.Authenticator;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -60,18 +62,6 @@ public class EmailSender {
 		
 		Map<String, Throwable> failedMessages = new LinkedHashMap<String, Throwable>();
 		Transport transport = null;
-		
-		try {
-			transport = getTransport(getSession());
-			transport.connect(getHost(), getPort(), getUsername(),
-					getPassword());
-		} catch (AuthenticationFailedException e) {
-			e.printStackTrace();
-			throw new EmailException("Authentication Failed: "+e.getMessage(), e);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-			throw new EmailException("Unknown Exception: "+e.getMessage(), e);
-		}
 		
 		try {
 			MimeMessage mimeMessage = createMimeMessage();
@@ -136,8 +126,21 @@ public class EmailSender {
 				}
 				
 				mimeMessage.saveChanges();
-				transport.sendMessage(mimeMessage,
-						mimeMessage.getAllRecipients());
+				
+				try {
+					transport = getTransport(getSession());
+					transport.connect(getHost(), getPort(), getUsername(),
+							getPassword());
+					
+					transport.sendMessage(mimeMessage,
+							mimeMessage.getAllRecipients());
+				} catch (AuthenticationFailedException e) {
+					e.printStackTrace();
+					throw new EmailException("Authentication Failed: "+e.getMessage(), e);
+				} catch (MessagingException e) {
+					e.printStackTrace();
+					throw new EmailException("Unknown Exception: "+e.getMessage(), e);
+				}
 				
 			} catch (MessagingException ex) {
 				failedMessages.put(ex.getMessage(), ex);
@@ -172,7 +175,12 @@ public class EmailSender {
 	
 	public synchronized Session getSession() {
 		if (this.session == null) {
-			this.session = Session.getInstance(getMailProperties());
+			Authenticator authenticator = new Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(getUsername(),getPassword());
+				}
+			};
+			this.session = Session.getInstance(getMailProperties(), authenticator);
 		}
 		return this.session;
 	}
@@ -245,4 +253,3 @@ public class EmailSender {
 	}
 	
 }
-
