@@ -6,6 +6,7 @@ import java.util.Arrays;
 import me.dabpessoa.email.Email;
 import me.dabpessoa.email.EmailException;
 import me.dabpessoa.email.EmailSender;
+import me.dabpessoa.email.ProxyCredentials;
 
 public class Main {
 
@@ -19,6 +20,7 @@ public class Main {
 		email.setTos(Arrays.asList("diego.pessoa@seduc.ce.gov.br"));
 		email.setSubject("teste de envio de email <título>");
 		email.setMessage("teste de corpo de e-mail");
+		email.setProxyCredentials(new ProxyCredentials("proxy", 8080));
 		
 		try {
 			sender.doSend(email);
