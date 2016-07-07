@@ -7,6 +7,9 @@ import com.sun.mail.util.MailSSLSocketFactory;
 
 public enum EmailProperties {
 
+    PROXY_SET("proxySet", "false"),
+    PROXY_HOST("ProxyHost", ""),
+    PROXY_PORT("ProxyPort", ""),
 	SMTP_AUTH("mail.smtp.auth", "true"),
 	SMTP_USERSET("mail.smtp.userset", "true"),
 	SMTP_SSL_ENABLE("mail.smtp.ssl.enable", "true"),

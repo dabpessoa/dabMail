@@ -15,6 +15,7 @@ public class Email {
 	private String message;
 	private Map<String, byte[]> anexos;
 	private Properties mailProperties;
+	private ProxyCredentials proxyCredentials;
 	
 	public Email() {}
 
@@ -88,6 +89,14 @@ public class Email {
 
 	public void setMailProperties(Properties mailProperties) {
 		this.mailProperties = mailProperties;
+	}
+
+	public ProxyCredentials getProxyCredentials() {
+		return proxyCredentials;
+	}
+	
+	public void setProxyCredentials(ProxyCredentials proxyCredentials) {
+		this.proxyCredentials = proxyCredentials;
 	}
 	
 }

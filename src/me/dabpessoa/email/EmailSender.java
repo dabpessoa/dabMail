@@ -128,6 +128,12 @@ public class EmailSender {
 				mimeMessage.saveChanges();
 				
 				try {
+					if (email.getProxyCredentials() != null && email.getProxyCredentials().notEmpty()) {
+						getMailProperties().put(EmailProperties.PROXY_SET, "true");
+						getMailProperties().put(EmailProperties.PROXY_HOST, email.getProxyCredentials().getHost());
+						getMailProperties().put(EmailProperties.PROXY_PORT, email.getProxyCredentials().getPort());
+					}
+					
 					transport = getTransport(getSession());
 					transport.connect(getHost(), getPort(), getUsername(),
 							getPassword());
@@ -147,7 +153,7 @@ public class EmailSender {
 			}
 		} finally {
 			try {
-				transport.close();
+				if (transport != null) transport.close();
 			} catch (MessagingException e) {
 				if (!(failedMessages.isEmpty())) {
 					throw new EmailException("Failed to close server connection after message failures: "+e.getMessage(), e);
