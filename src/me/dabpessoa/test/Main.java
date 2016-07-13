@@ -6,21 +6,23 @@ import java.util.Arrays;
 import me.dabpessoa.email.Email;
 import me.dabpessoa.email.EmailException;
 import me.dabpessoa.email.EmailSender;
-import me.dabpessoa.email.ProxyCredentials;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		EmailSender sender = new EmailSender("smtp.seduc.ce.gov.br", "financeiro@seduc.ce.gov.br", "f!an@489");
-		sender.setProtocol("smtps");
+		final String host = "smtp.gmail.com";
+		final String username = "atma.vaicomecar@gmail.com";
+		final String password = "[coloque_aqui_a_senha]";
+		
+		EmailSender sender = new EmailSender(host, username, password);
 		
 		Email email = new Email();
-		email.setFrom("diego.pessoa@seduc.ce.gov.br");
-		email.setTos(Arrays.asList("diego.pessoa@seduc.ce.gov.br"));
-		email.setSubject("teste de envio de email <tÃ­tulo>");
-		email.setMessage("teste de corpo de e-mail");
-		email.setProxyCredentials(new ProxyCredentials("proxy", 8080));
+		email.setFrom("atma.vaicomecar@gmail.com");
+		email.setTos(Arrays.asList("dabpessoa@gmail.com"));
+		email.setSubject("Título do meu e-mail");
+		email.setMessage("Corpo do meu e-mail");
+//		email.setProxyCredentials(new ProxyCredentials("proxy", 8080));
 		
 		try {
 			sender.doSend(email);
