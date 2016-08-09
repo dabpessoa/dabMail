@@ -17,17 +17,17 @@ public class Main {
 		EmailSender sender = new EmailSender(host, username, password);
 		
 //		Email email = new Email();
-//		email.setFrom("diego.pessoa@seduc.ce.gov.br");
-//		email.setTos(Arrays.asList("diego.pessoa@seduc.ce.gov.br"));
-//		email.setSubject("teste de envio de email <tÃ­tulo>");
-//		email.setMessage("teste de corpo de e-mail");
+//		email.setFrom("atma.vaicomecar@gmail.com");
+//		email.setTos(Arrays.asList("dabpessoa@gmail.com"));
+//		email.setSubject("Título do meu e-mail");
+//		email.setMessage("Corpo do meu e-mail");
 //		email.setProxyCredentials(new ProxyCredentials("proxy", 8080));
 		
 		Email email = Email.create()
-						.from("diego.pessoa@seduc.ce.gov.br")
-						.to("diego.pessoa@seduc.ce.gov.br")
-						.subject("teste")
-						.message("teste message")
+						.from("atma.vaicomecar@gmail.com")
+						.to("dabpessoa@gmail.com")
+						.subject("Título do meu e-mail")
+						.message("Corpo do meu e-mail")
 //						.proxy("proxy", 8080)
 						.mail();
 		
