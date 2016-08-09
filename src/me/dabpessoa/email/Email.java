@@ -16,8 +16,11 @@ public class Email {
 	private Map<String, byte[]> anexos;
 	private Properties mailProperties;
 	private ProxyCredentials proxyCredentials;
+	private EmailGenerator generator;
 	
-	public Email() {}
+	public Email() {
+		generator = new EmailGenerator(this);
+	}
 
 	public String getSubject() {
 		return subject;
@@ -97,6 +100,14 @@ public class Email {
 	
 	public void setProxyCredentials(ProxyCredentials proxyCredentials) {
 		this.proxyCredentials = proxyCredentials;
+	}
+	
+	public static EmailGenerator create() {
+		return new Email().getGenerator();
+	}
+	
+	public EmailGenerator getGenerator() {
+		return generator;
 	}
 	
 }
