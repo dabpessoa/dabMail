@@ -10,8 +10,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		EmailSender sender = new EmailSender("smtp.seduc.ce.gov.br", "financeiro@seduc.ce.gov.br", "f!an@489");
-		sender.setProtocol("smtps");
+		final String host = "smtp.gmail.com";
+		final String username = "atma.vaicomecar@gmail.com";
+		final String password = "[coloque_aqui_a_senha]";
+		
+		EmailSender sender = new EmailSender(host, username, password);
 		
 //		Email email = new Email();
 //		email.setFrom("diego.pessoa@seduc.ce.gov.br");
@@ -25,7 +28,7 @@ public class Main {
 						.to("diego.pessoa@seduc.ce.gov.br")
 						.subject("teste")
 						.message("teste message")
-						.proxy("proxy", 8080)
+//						.proxy("proxy", 8080)
 						.mail();
 		
 		try {
