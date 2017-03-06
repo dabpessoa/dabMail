@@ -89,6 +89,7 @@ public class EmailSender {
 						
 						InputStream is = new BufferedInputStream(new ByteArrayInputStream(entry.getValue()));
 						String mimeType = URLConnection.guessContentTypeFromStream(is);
+						if (mimeType == null) mimeType = "application/octet-stream";
 						ByteArrayDataSource dataSource = new ByteArrayDataSource(entry.getValue(), mimeType);
 						
 						mimeBodyPart.setDataHandler(new DataHandler(dataSource));

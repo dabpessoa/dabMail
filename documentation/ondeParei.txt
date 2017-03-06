@@ -1,0 +1,2 @@
+1) permitir usuário escolher os mime-types dos anexos.
+2) verificar melhoria para dentro do corpo do e-mail aceitar diferentes tipos de arquivos (texto, img, etc..). [http://stackoverflow.com/questions/13135593/setting-content-type-for-mimemessage]

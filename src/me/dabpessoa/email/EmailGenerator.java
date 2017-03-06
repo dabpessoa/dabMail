@@ -66,7 +66,7 @@ public class EmailGenerator {
 		return this;
 	}
 	
-	public EmailGenerator anexo(String fileName, byte[] bytes) {
+	public EmailGenerator attachment(String fileName, byte[] bytes) {
 		if (email.getAnexos() == null) email.setAnexos(new HashMap<String,byte[]>());
 		email.getAnexos().put(fileName, bytes);
 		return this;
