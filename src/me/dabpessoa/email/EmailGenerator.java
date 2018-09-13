@@ -65,10 +65,18 @@ public class EmailGenerator {
 		email.setMessage(message);
 		return this;
 	}
-	
+
+	public EmailGenerator attachment(String fileName, String mimeType, byte[] bytes) {
+		Anexo anexo = new Anexo(fileName, mimeType, bytes);
+		if (email.getAnexos() == null) email.setAnexos(new ArrayList<>());
+		email.getAnexos().add(anexo);
+		return this;
+	}
+
 	public EmailGenerator attachment(String fileName, byte[] bytes) {
-		if (email.getAnexos() == null) email.setAnexos(new HashMap<String,byte[]>());
-		email.getAnexos().put(fileName, bytes);
+		Anexo anexo = new Anexo(fileName, bytes);
+		if (email.getAnexos() == null) email.setAnexos(new ArrayList<>());
+		email.getAnexos().add(anexo);
 		return this;
 	}
 	

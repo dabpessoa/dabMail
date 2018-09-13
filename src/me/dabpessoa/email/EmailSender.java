@@ -82,15 +82,18 @@ public class EmailSender {
 				
 				
 				if (email.getAnexos() != null) {
-					for (Map.Entry<String, byte[]> entry : email.getAnexos().entrySet()) {
+					for (Anexo anexo : email.getAnexos()) {
 						MimeBodyPart mimeBodyPart = new MimeBodyPart();
 						mimeBodyPart.setDisposition("attachment");
-						mimeBodyPart.setFileName(entry.getKey());
+						mimeBodyPart.setFileName(anexo.getNome());
 						
-						InputStream is = new BufferedInputStream(new ByteArrayInputStream(entry.getValue()));
-						String mimeType = URLConnection.guessContentTypeFromStream(is);
-						if (mimeType == null) mimeType = "application/octet-stream";
-						ByteArrayDataSource dataSource = new ByteArrayDataSource(entry.getValue(), mimeType);
+						InputStream is = new BufferedInputStream(new ByteArrayInputStream(anexo.getBytes()));
+						String mimeType = anexo.getMimeType();
+						if (mimeType == null) {
+							mimeType = URLConnection.guessContentTypeFromStream(is);
+							if (mimeType == null) mimeType = "application/octet-stream";
+						}
+						ByteArrayDataSource dataSource = new ByteArrayDataSource(anexo.getBytes(), mimeType);
 						
 						mimeBodyPart.setDataHandler(new DataHandler(dataSource));
 						multipart.addBodyPart(mimeBodyPart);

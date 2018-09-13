@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: activation-1.1.1.jar javax.mail-1.5.5.jar javamail-1.5.5-s
+ rc.zip javax.mail-api-1.5.5.jar
+Main-Class: 
+

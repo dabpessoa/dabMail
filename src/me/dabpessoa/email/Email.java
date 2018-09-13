@@ -13,7 +13,7 @@ public class Email {
 	private List<String> hiddenCopies;
 	private String encoding;
 	private String message;
-	private Map<String, byte[]> anexos;
+	private List<Anexo> anexos;
 	private Properties mailProperties;
 	private ProxyCredentials proxyCredentials;
 	private EmailGenerator generator;
@@ -78,11 +78,11 @@ public class Email {
 		this.message = message;
 	}
 
-	public Map<String, byte[]> getAnexos() {
+	public List<Anexo> getAnexos() {
 		return anexos;
 	}
-	
-	public void setAnexos(Map<String, byte[]> anexos) {
+
+	public void setAnexos(List<Anexo> anexos) {
 		this.anexos = anexos;
 	}
 
